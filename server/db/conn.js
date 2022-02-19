@@ -1,8 +1,6 @@
 const mongoose = require("mongoose")
 
-const DB =
-  "mongodb+srv://kishor:kishorbha@cluster0.wblx5.mongodb.net/MERNAPP?retryWrites=true&w=majority"
-
+const DB = "AddYour"
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
