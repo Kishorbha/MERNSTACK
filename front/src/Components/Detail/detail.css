@@ -1,0 +1,28 @@
+.left_view img {
+  max-width: 100px;
+  height: 100px;
+  padding: 3px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: right;
+  border: 1px solid rgba(165, 157, 157, 0.322);
+}
+
+.left_view h3 {
+  font-size: 21px;
+}
+
+.left_view span {
+  font-weight: 400;
+}
+
+.left_view p {
+  font-weight: 600;
+}
+.right_view p {
+  font-weight: 600;
+}
+
+.right_view span {
+  font-weight: 400;
+}
