@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 const Edit = () => {
   const [inpval, setINP] = useState({
@@ -11,6 +11,8 @@ const Edit = () => {
     add: "",
     desc: "",
   })
+
+  const navigate = useNavigate()
 
   const { id } = useParams("")
 
@@ -73,6 +75,7 @@ const Edit = () => {
     } else {
       alert("user registered")
       console.log("data added")
+      navigate("/")
     }
   }
 

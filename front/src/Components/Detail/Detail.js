@@ -7,34 +7,53 @@ import EmailIcon from "@mui/icons-material/Email"
 import WorkIcon from "@mui/icons-material/Work"
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone"
 import LocationOnIcon from "@mui/icons-material/LocationOn"
-import { useParams } from "react-router-dom"
+import { useParams, NavLink, useNavigate } from "react-router-dom"
 
 import "./detail.css"
 
 const Detail = () => {
   const { id } = useParams("")
   const [employee, setEmployee] = useState([])
+  const navigate = useNavigate()
+  const getemployee = async () => {
+    const res = await fetch(`/employee/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
 
-  React.useEffect(() => {
-    const getemployee = async () => {
-      const res = await fetch(`/employee/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+    const data = await res.json()
 
-      const data = await res.json()
-
-      if (res.data === 422 || !data) {
-        console.log("error")
-      } else {
-        setEmployee(data)
-      }
+    if (res.data === 422 || !data) {
+      console.log("error")
+    } else {
+      setEmployee(data)
     }
+  }
+  React.useEffect(() => {
     getemployee()
-  }, [id])
-  console.log(employee)
+  }, [])
+
+  const deleteuser = async (id) => {
+    const res2 = await fetch(`/employee/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    const deletedata = await res2.json()
+    console.log(deletedata)
+
+    if (res2.status === 422 || !deletedata) {
+      console.log("error")
+    } else {
+      alert("user deleted")
+      console.log("user deleted")
+      setEmployee("")
+      navigate("/")
+    }
+  }
 
   return (
     <div className="container mt-3 ">
@@ -42,10 +61,15 @@ const Detail = () => {
       <Card sx={{ maxWidth: 600 }}>
         <CardContent>
           <div className="add_btn">
-            <button className="btn btn-primary mx-2">
-              <CreateIcon />
-            </button>
-            <button className="btn btn-danger">
+            <NavLink to={`/edit/${employee._id}`}>
+              <button className="btn btn-primary mx-2">
+                <CreateIcon />
+              </button>
+            </NavLink>
+            <button
+              className="btn btn-danger"
+              onClick={() => deleteuser(employee._id)}
+            >
               <DeleteOutlineIcon />
             </button>
           </div>

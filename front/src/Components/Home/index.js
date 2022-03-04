@@ -28,6 +28,25 @@ const Home = () => {
     getdata()
   }, [])
 
+  const deleteuser = async (id) => {
+    const res2 = await fetch(`/employee/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    const deletedata = await res2.json()
+    console.log(deletedata)
+
+    if (res2.status === 422 || !deletedata) {
+      console.log("error")
+    } else {
+      alert("user deleted")
+      console.log("user deleted")
+      getdata()
+    }
+  }
+
   return (
     <div className="mt-5">
       <div className="container ">
@@ -69,7 +88,10 @@ const Home = () => {
                           <CreateIcon />
                         </button>
                       </NavLink>
-                      <button className="btn btn-danger">
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => deleteuser(employee._id)}
+                      >
                         <DeleteOutlineIcon />
                       </button>
                     </td>

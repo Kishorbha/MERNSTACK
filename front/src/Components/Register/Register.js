@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const Register = () => {
   const [inpval, setINP] = useState({
@@ -10,6 +11,8 @@ const Register = () => {
     add: "",
     desc: "",
   })
+
+  const navigate = useNavigate()
 
   const setdata = (e) => {
     const { name, value } = e.target
@@ -50,6 +53,7 @@ const Register = () => {
     } else {
       alert("user registered")
       console.log("data added")
+      navigate("/")
     }
   }
 
