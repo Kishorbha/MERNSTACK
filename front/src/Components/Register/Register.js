@@ -75,6 +75,7 @@ const Register = () => {
               aria-describedby="emailHelp"
             />
           </div>
+
           <div className="mb-3 col-lg-6 col-md-6 col-12">
             <label htmlFor="exampleInputPassword1" className="form-label">
               Email
