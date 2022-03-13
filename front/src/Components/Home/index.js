@@ -3,12 +3,13 @@ import { NavLink } from "react-router-dom"
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye"
 import CreateIcon from "@mui/icons-material/Create"
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
+import baseURL from "../../api"
 
 const Home = () => {
   const [employee, setEmployee] = useState([])
 
   const getdata = async (e) => {
-    const res = await fetch("/employee", {
+    const res = await fetch(baseURL + "/employee", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -27,9 +28,10 @@ const Home = () => {
   useEffect(() => {
     getdata()
   }, [])
+  console.log(baseURL)
 
   const deleteuser = async (id) => {
-    const res2 = await fetch(`/employee/${id}`, {
+    const res2 = await fetch(baseURL + `/employee/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

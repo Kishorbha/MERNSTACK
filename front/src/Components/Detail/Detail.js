@@ -9,6 +9,8 @@ import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone"
 import LocationOnIcon from "@mui/icons-material/LocationOn"
 import { useParams, NavLink, useNavigate } from "react-router-dom"
 
+import baseURL from "../../api"
+
 import "./detail.css"
 
 const Detail = () => {
@@ -16,7 +18,7 @@ const Detail = () => {
   const [employee, setEmployee] = useState([])
   const navigate = useNavigate()
   const getemployee = async () => {
-    const res = await fetch(`/employee/${id}`, {
+    const res = await fetch(baseURL + `/employee/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

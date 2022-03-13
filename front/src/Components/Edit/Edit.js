@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
+import baseURL from "../../api"
 
 const Edit = () => {
   const [inpval, setINP] = useState({
@@ -28,7 +29,7 @@ const Edit = () => {
 
   useEffect(() => {
     const getdata = async () => {
-      const res = await fetch(`/employee/${id}`, {
+      const res = await fetch(baseURL + `/employee/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +52,7 @@ const Edit = () => {
 
     const { name, email, work, add, mobile, desc, age } = inpval
 
-    const res2 = await fetch(`/employee/${id}`, {
+    const res2 = await fetch(baseURL + `/employee/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
