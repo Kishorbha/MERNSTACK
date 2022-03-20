@@ -12,6 +12,8 @@ const port = process.env.PORT || 8003
 app.use(cors())
 app.use(express.json())
 
+// Public Folder
+
 app.use(router)
 
 app.listen(port, () => {

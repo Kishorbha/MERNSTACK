@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import baseURL from "../../api"
 
 const Register = () => {
+  const [profileImg, setProfile] = useState("")
   const [inpval, setINP] = useState({
     name: "",
     email: "",
@@ -25,10 +26,15 @@ const Register = () => {
     })
   }
 
+  const finaldata = {
+    ...inpval,
+    profileImg,
+  }
+
   const addinpdata = async (e) => {
     e.preventDefault()
 
-    const { name, email, work, add, mobile, desc, age } = inpval
+    const { name, email, work, add, mobile, desc, age, profileImg } = finaldata
 
     const res = await fetch(baseURL + "/register", {
       method: "POST",
@@ -36,6 +42,7 @@ const Register = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        profileImg,
         name,
         email,
         work,
@@ -47,6 +54,7 @@ const Register = () => {
     })
 
     const data = await res.json()
+    console.log(data)
 
     if (res.status === 422 || !data) {
       console.log("error ")
@@ -60,7 +68,7 @@ const Register = () => {
 
   return (
     <div className="container ">
-      <form className="mt-4">
+      <form className="mt-4" encType="multipart/form-data">
         <div className="row">
           <div className="mb-3 col-lg-6 col-md-6 col-12">
             <label htmlFor="exampleInputEmail1" className="form-label">
@@ -74,6 +82,22 @@ const Register = () => {
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
+            />
+          </div>
+
+          <div className="mb-3 col-lg-6 col-md-6 col-12">
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              Profile Photo
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              className="form-control"
+              id="input-front"
+              name="profileImg"
+              onChange={(e) =>
+                setProfile(URL.createObjectURL(e.target.files[0]))
+              }
             />
           </div>
 

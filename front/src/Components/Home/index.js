@@ -28,7 +28,8 @@ const Home = () => {
   useEffect(() => {
     getdata()
   }, [])
-  console.log(baseURL)
+  // console.log(baseURL)
+  console.log(employee)
 
   const deleteuser = async (id) => {
     const res2 = await fetch(baseURL + `/employee/${id}`, {

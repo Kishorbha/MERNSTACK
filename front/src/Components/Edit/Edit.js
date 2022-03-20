@@ -4,6 +4,7 @@ import baseURL from "../../api"
 
 const Edit = () => {
   const [inpval, setINP] = useState({
+    profileImg: "",
     name: "",
     email: "",
     age: "",
@@ -50,7 +51,7 @@ const Edit = () => {
   const addinpdata = async (e) => {
     e.preventDefault()
 
-    const { name, email, work, add, mobile, desc, age } = inpval
+    const { profileImg, name, email, work, add, mobile, desc, age } = inpval
 
     const res2 = await fetch(baseURL + `/employee/${id}`, {
       method: "PATCH",
@@ -58,6 +59,7 @@ const Edit = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        profileImg,
         name,
         email,
         work,

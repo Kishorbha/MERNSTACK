@@ -1,16 +1,39 @@
 const express = require("express")
+const multer = require("multer")
+const path = require("path")
 const router = express.Router()
 const users = require("../models/userSchema")
+
+// set Storage Engine
+const storage = multer.diskStorage({
+  destination: "./public/uploads/img/",
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "--" + file.originalname)
+  },
+})
+
+const upload = multer({
+  storage: storage,
+}).single("profileImg")
 
 // router.get("/", (req, res) => {
 //   console.log("CONNECT")
 // })
 
 // TODO:register
-router.post("/register", async (req, res) => {
+router.post("/register", upload, async (req, res) => {
   console.log(req.body)
-  const { name, email, mobile, age, work, add, desc } = req.body
-  if (!name || !email || !mobile || !age || !work || !add || !desc) {
+  const { name, profileImg, email, mobile, age, work, add, desc } = req.body
+  if (
+    !name ||
+    !email ||
+    !profileImg ||
+    !mobile ||
+    !age ||
+    !work ||
+    !add ||
+    !desc
+  ) {
     res.status(404).send("Please fill the data")
   }
   try {
@@ -27,6 +50,7 @@ router.post("/register", async (req, res) => {
         work,
         add,
         desc,
+        profileImg,
       })
       await adduser.save()
       res.status(201).json(adduser)

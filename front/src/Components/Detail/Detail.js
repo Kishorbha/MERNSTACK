@@ -37,6 +37,8 @@ const Detail = () => {
     getemployee()
   }, [])
 
+  console.log(employee)
+
   const deleteuser = async (id) => {
     const res2 = await fetch(`/employee/${id}`, {
       method: "DELETE",
@@ -77,10 +79,7 @@ const Detail = () => {
           </div>
           <div className="row">
             <div className="left_view col-lg-6 col-md-6 col-12">
-              <img
-                src="https://scontent.fbdp1-1.fna.fbcdn.net/v/t31.18172-8/20934096_1437686139617915_6914272310457910536_o.jpg?_nc_cat=106&ccb=1-5&_nc_sid=19026a&_nc_ohc=EyAOyVhoA7YAX_JxWbS&_nc_ht=scontent.fbdp1-1.fna&oh=00_AT-OBqqyCVDH18SZE6DxhNgUDL31EbtTtAbF7ELxIFnjMQ&oe=62284F5C"
-                alt="profile"
-              />
+              <img src={employee.profileImg} alt="profile" />
               <h3 className="mt-3">
                 Name: <span>{employee.name}</span>
               </h3>
